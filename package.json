@@ -1,0 +1,34 @@
+{
+  "name": "jm-deploy-helper",
+  "version": "0.0.1",
+  "description": "",
+  "engines": {
+    "node": ">=16.17.0"
+  },
+  "main": "index.js",
+  "bin": {
+    "jm-deploy-helper": "./bin/jm-deploy-helper",
+    "helper": "./bin/jm-deploy-helper"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohaifengke/jm-deploy-helper"
+  },
+  "keywords": [
+    "jm-deploy-helper",
+    "jm-deploy-helper-cli",
+    "deploy",
+    "cli"
+  ],
+  "author": "Jhail",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "4.1.2",
+    "commander": "^12.0.0",
+    "execa": "^9.0.0",
+    "fs-extra": "^11.2.0",
+    "ini": "^4.1.2",
+    "inquirer": "8.2.4",
+    "ora": "^8.0.1"
+  }
+}

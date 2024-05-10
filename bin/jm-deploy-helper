@@ -1,0 +1,36 @@
+#! /usr/bin/env node
+
+const { Command } = require("commander");
+const chalk = require("chalk");
+
+const program = new Command();
+
+program
+  .name(
+    `${chalk.bgBlue("Jm-build-helper")} (alias ${chalk.bgBlue(
+      "build-helper"
+    )} or ${chalk.bgBlue("toy")})`
+  )
+  .description(chalk.blue("A toy to improve deployment efficiency."))
+  .version(
+    `Jm-build-helper@${require("../package.json").version}`,
+    "-V, -v, --version"
+  )
+  .usage(`<command> [option]`);
+
+program
+  .command("deploy")
+  .description(
+    "Deploy to a server or send to a DingDing user based on your pre-set deployment mode."
+  )
+  .option("-m, --mode <mode>", "指定部署模式，优先级高于默认设置的部署模式")
+  .action((options) => {
+    console.log(
+      chalk.blueBright(
+        `Jm-build-helper CLI v${require("../package.json").version}`
+      )
+    );
+    require("../lib/deploy")(options);
+  });
+
+program.parse(process.argv);
