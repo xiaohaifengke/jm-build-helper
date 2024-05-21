@@ -6,13 +6,16 @@ const configFilePath = path.join(
 const buildConfig = {
     commitMsg: ''
 }
+/**
+  commitMsg = "temp",
+ */
 const defaultConfig = {
   mode: "git",
   username: "",
   password: "",
   remoteUrl: "http://172.24.141.176:8357/git/yetu_web.git",
   rules: {
-    dev: {
+    development: {
         remoteBranchName: 'devtest',
         reg: ''
     },
@@ -20,7 +23,7 @@ const defaultConfig = {
         remoteBranchName: 'test',
         reg: ''
     },
-    prod: {
+    production: {
         remoteBranchName: 'master',
         reg: ''
     }
