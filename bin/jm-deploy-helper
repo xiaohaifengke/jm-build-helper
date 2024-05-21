@@ -30,7 +30,7 @@ program
         `Jm-build-helper CLI v${require("../package.json").version}`
       )
     );
-    require("../lib/deploy")(options);
+    require("../lib")(options);
   });
 
 program.parse(process.argv);
