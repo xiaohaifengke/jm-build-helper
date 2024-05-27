@@ -1,9 +1,10 @@
 const {configFilePath} = require('./config')
-const { get, set, remove } = require('./index')
+const { get, set, remove, override } = require('./index')
 const {guide} = require('./guide')
 module.exports = async function(value, options) {
   if (Object.keys(options).length === 0) {
-    await guide()
+    const newConfig = await guide()
+    override(newConfig)
     return
   }
   for(const h in options) {

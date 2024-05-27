@@ -11,7 +11,8 @@ const config = { ...defaultConfig, ...configFileContent }
 module.exports = {
   get,
   set,
-  remove
+  remove,
+  override
 }
 
 function get(key) {
@@ -31,5 +32,10 @@ function remove(key) {
   delete config[key]
   delete configFileContent[key]
   fs.writeFileSync(configFilePath, ini.stringify(configFileContent))
+}
+
+function override(newConfig) {
+  Object.assign(config, newConfig)
+  fs.writeFileSync(configFilePath, ini.stringify(newConfig))
 }
 

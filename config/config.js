@@ -13,11 +13,12 @@ const defaultConfig = {
   password: "",
   remoteUrl: "", // http://172.24.141.176:8357/git/yetu_web.git
   'rules:development:remoteBranchName': 'devtest',
-  'rules:development:reg': '',
+  'rules:development:reg': '^((feature|refactor|fix)/.+|master|develop|dev|release)$',
   'rules:test:remoteBranchName': 'test',
-  'rules:test:reg': '',
+  'rules:test:reg': '^release$',
   'rules:production:remoteBranchName': 'master',
-  'rules:production:reg': '',
+  'rules:production:reg': '^master$',
+  receiver: ''
 };
 module.exports = {
   configFilePath,
