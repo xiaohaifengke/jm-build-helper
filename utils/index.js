@@ -2,6 +2,7 @@ const { execSync } = require("child_process");
 const fs = require("fs").promises;
 const path = require("path");
 const { minimatch } = require("minimatch");
+const axios = require('axios');
 
 function getCurrentGitBranch() {
   try {
@@ -85,8 +86,32 @@ async function copyDirectory(source, destination, excludePatterns, isTop) {
   }
 }
 
+async function sendDingTalkMarkdown(webhookUrl, markdownContent, atMobiles = []) {
+  try {
+    const response = await axios.post(webhookUrl, {
+      msgtype: 'markdown',
+      markdown: {
+        title: '部署成功通知',
+        text: markdownContent,
+      },
+      at: {
+        atMobiles,
+      },
+    });
+
+    if (response.data.errcode === 0) {
+      console.log('Markdown message sent successfully.');
+    } else {
+      console.log('Failed to send markdown message:', response.data);
+    }
+  } catch (error) {
+    console.error('Error sending markdown message:', error.message);
+  }
+}
+
 module.exports = {
   getCurrentGitBranch,
   cleanDirectoryExcept,
   copyDirectory,
+  sendDingTalkMarkdown
 };

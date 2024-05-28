@@ -36,5 +36,6 @@ const defaultConfig = {
 module.exports = {
   configFilePath,
   defaultConfig,
-  projectWorkspacePath
+  projectWorkspacePath,
+  projectName
 };
