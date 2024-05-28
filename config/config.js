@@ -23,7 +23,7 @@ const defaultConfig = {
   mode: "git",
   username: "",
   password: "",
-  remoteUrl: "", // http://172.24.141.176:8357/git/yetu_web.git
+  remoteUrl: "",
   "rules:development:remoteBranchName": "devtest",
   "rules:development:reg":
     "^((feature|refactor|fix)/.+|master|develop|dev|release)$",
