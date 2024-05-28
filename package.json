@@ -1,6 +1,6 @@
 {
   "name": "jm-deploy-helper",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "",
   "engines": {
     "node": ">=16.17.0"
