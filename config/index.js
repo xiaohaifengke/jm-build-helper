@@ -1,7 +1,10 @@
 const fs = require('fs')
 const ini = require('ini')
+const path = require('path')
 
 const { configFilePath, defaultConfig } = require('./config')
+
+
 let configFileContent = {}
 if (fs.existsSync(configFilePath)) {
   configFileContent = ini.parse(fs.readFileSync(configFilePath, 'utf-8'))
