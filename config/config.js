@@ -21,6 +21,7 @@ console.log('projectWorkspacePath: ', projectWorkspacePath, configFilePath);
 
 const defaultConfig = {
   mode: "git",
+  distPath: 'dist',
   username: "",
   password: "",
   remoteUrl: "",

@@ -26,6 +26,14 @@ async function guide() {
 
 async function guideGitConfig() {
   const config = get();
+  const { distPath } = await inquirer.prompt([
+    {
+      type: "input",
+      name: "distPath",
+      message: `请输入构建输出目录的相对路径`,
+      default: config.distPath,
+    },
+  ]);
   const { username } = await inquirer.prompt([
     {
       type: "input",
@@ -148,6 +156,7 @@ async function guideGitConfig() {
   ]);
 
   return {
+    distPath,
     username,
     password,
     remoteUrl,
