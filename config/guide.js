@@ -71,7 +71,7 @@ async function guideGitConfig() {
       type: "input",
       name: "devWebhook",
       message: `【开发环境】请输入钉钉通知的webhook`,
-      default: config["rules:development:webhook"] || '',
+      default: config["rules:development:webhookUrl"] || '',
     },
   ]);
   const { devAtMobiles } = await inquirer.prompt([
@@ -79,7 +79,7 @@ async function guideGitConfig() {
       type: "input",
       name: "devAtMobiles",
       message: `【开发环境】请输入钉钉通知人员的手机号`,
-      default: config["rules:development:atMobiles"]?.join(',') || '',
+      default: config["rules:development:atMobiles"] || '',
     },
   ]);
   const { testBranchName } = await inquirer.prompt([
@@ -103,7 +103,7 @@ async function guideGitConfig() {
       type: "input",
       name: "testWebhook",
       message: `【测试环境】请输入钉钉通知的webhook`,
-      default: config["rules:development:webhook"] || '',
+      default: config["rules:development:webhookUrl"] || '',
     },
   ]);
   const { testAtMobiles } = await inquirer.prompt([
@@ -111,7 +111,7 @@ async function guideGitConfig() {
       type: "input",
       name: "testAtMobiles",
       message: `【测试环境】请输入钉钉通知人员的手机号`,
-      default: config["rules:development:atMobiles"]?.join(',') || '',
+      default: config["rules:development:atMobiles"] || '',
     },
   ]);
   const { prodBranchName } = await inquirer.prompt([
@@ -135,7 +135,7 @@ async function guideGitConfig() {
       type: "input",
       name: "prodWebhook",
       message: `【生产环境】请输入钉钉通知的webhook`,
-      default: config["rules:development:webhook"] || '',
+      default: config["rules:development:webhookUrl"] || '',
     },
   ]);
   const { prodAtMobiles } = await inquirer.prompt([
@@ -143,7 +143,7 @@ async function guideGitConfig() {
       type: "input",
       name: "prodAtMobiles",
       message: `【生产环境】请输入钉钉通知人员的手机号`,
-      default: config["rules:development:atMobiles"]?.join(',') || '',
+      default: config["rules:development:atMobiles"] || '',
     },
   ]);
 
@@ -153,16 +153,16 @@ async function guideGitConfig() {
     remoteUrl,
     "rules:development:remoteBranchName": devBranchName,
     "rules:development:reg": devMatchRule,
-    "rules:development:webhook": devWebhook,
-    "rules:development:atMobiles": devAtMobiles.split(','),
+    "rules:development:webhookUrl": devWebhook,
+    "rules:development:atMobiles": devAtMobiles,
     "rules:test:remoteBranchName": testBranchName,
     "rules:test:reg": testMatchRule,
-    "rules:test:webhook": testWebhook,
-    "rules:test:atMobiles": testAtMobiles.split(','),
+    "rules:test:webhookUrl": testWebhook,
+    "rules:test:atMobiles": testAtMobiles,
     "rules:production:remoteBranchName": prodBranchName,
     "rules:production:reg": prodMatchRule,
-    "rules:production:webhook": prodWebhook,
-    "rules:production:atMobiles": prodAtMobiles.split(','),
+    "rules:production:webhookUrl": prodWebhook,
+    "rules:production:atMobiles": prodAtMobiles,
   };
 }
 

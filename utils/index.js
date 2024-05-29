@@ -2,7 +2,7 @@ const { execSync } = require("child_process");
 const fs = require("fs").promises;
 const path = require("path");
 const { minimatch } = require("minimatch");
-const axios = require('axios');
+const axios = require("axios");
 
 function getCurrentGitBranch() {
   try {
@@ -86,32 +86,75 @@ async function copyDirectory(source, destination, excludePatterns, isTop) {
   }
 }
 
-async function sendDingTalkMarkdown(webhookUrl, markdownContent, atMobiles = []) {
+async function sendDingTalkMarkdown({
+  webhookUrl,
+  atMobiles,
+  succeed,
+  failedReason,
+  projectName,
+  env,
+  username,
+}) {
   try {
     const response = await axios.post(webhookUrl, {
-      msgtype: 'markdown',
+      msgtype: "markdown",
       markdown: {
-        title: '部署成功通知',
-        text: markdownContent,
+        title: "部署结果通知",
+        text: genMarkdownContent({
+          succeed,
+          projectName,
+          env,
+          username,
+          atMobiles,
+        }),
       },
       at: {
-        atMobiles,
+        atMobiles: [atMobiles],
       },
     });
 
     if (response.data.errcode === 0) {
-      console.log('Markdown message sent successfully.');
+      console.log("Markdown message sent successfully.");
     } else {
-      console.log('Failed to send markdown message:', response.data);
+      console.log("Failed to send markdown message:", response.data);
     }
   } catch (error) {
-    console.error('Error sending markdown message:', error.message);
+    console.error("Error sending markdown message:", error.message);
   }
+}
+
+function genMarkdownContent({
+  succeed,
+  projectName,
+  env,
+  username,
+  atMobiles,
+  failedReason,
+}) {
+  return `
+# 部署${succeed ? "成功" : "失败"}通知
+
+部署${succeed ? "成功" : "失败"}啦！
+
+**项目名称：** ${projectName}
+
+**环境：** ${env}
+
+**操作人员：** ${username}
+
+${!succeed ? "**失败原因：** " + failedReason : ""}
+
+${atMobiles
+  .split(",")
+  .map((m) => "@" + m.trim())
+  .join("")}
+
+`;
 }
 
 module.exports = {
   getCurrentGitBranch,
   cleanDirectoryExcept,
   copyDirectory,
-  sendDingTalkMarkdown
+  sendDingTalkMarkdown,
 };
