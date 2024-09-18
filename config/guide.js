@@ -154,6 +154,22 @@ async function guideGitConfig() {
       default: config["rules:development:atMobiles"] || '',
     },
   ]);
+  const { failedWebhook } = await inquirer.prompt([
+    {
+      type: "input",
+      name: "failedWebhook",
+      message: `请输入当部署失败时钉钉通知的webhook`,
+      default: config["rules:development:webhookUrl"] || "",
+    },
+  ]);
+  const { failedAtMobiles } = await inquirer.prompt([
+    {
+      type: "input",
+      name: "failedAtMobiles",
+      message: `【请输入当部署失败时钉钉通知人员的手机号`,
+      default: config["rules:development:atMobiles"] || "",
+    },
+  ]);
 
   return {
     distPath,
@@ -172,6 +188,8 @@ async function guideGitConfig() {
     "rules:production:reg": prodMatchRule,
     "rules:production:webhookUrl": prodWebhook,
     "rules:production:atMobiles": prodAtMobiles,
+    failedWebhook: failedWebhook,
+    failedAtMobiles: failedAtMobiles,
   };
 }
 
