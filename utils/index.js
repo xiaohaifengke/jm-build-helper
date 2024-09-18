@@ -106,6 +106,7 @@ async function sendDingTalkMarkdown({
           env,
           username,
           atMobiles,
+          failedReason,
         }),
       },
       at: {

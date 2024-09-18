@@ -3,10 +3,10 @@ node -v
 npm -v
 pnpm -v
 ls
-rm -rf temp-cd
-mkdir temp-cd
+rm -rf git-workspace
+mkdir git-workspace
 echo "http://liujiahai:={1qvq/[cqKIVKsDc~N/ME5lrlRwk@172.24.141.176:8357/git/yetu_web.git" > \.git-credential
-cd temp-cd
+cd git-workspace
 git init
 git config credential.helper store --file=.git-credential
 git remote add origin http://172.24.141.176:8357/git/yetu_web.git
