@@ -95,6 +95,7 @@ async function sendDingTalkMarkdown({
   env,
   username,
   commitMsg,
+  duration,
 }) {
   try {
     const response = await axios.post(webhookUrl, {
@@ -109,6 +110,7 @@ async function sendDingTalkMarkdown({
           atMobiles,
           failedReason,
           commitMsg,
+          duration,
         }),
       },
       at: {
@@ -134,6 +136,7 @@ function genMarkdownContent({
   atMobiles,
   failedReason,
   commitMsg,
+  duration,
 }) {
   return `
 # 部署${succeed ? "成功" : "失败"}通知
@@ -148,6 +151,8 @@ function genMarkdownContent({
 
 **操作人员：** ${username}
 
+**部署耗时：** ${duration}s
+
 ${!succeed ? "**失败原因：** " + failedReason : ""}
 
 ${atMobiles
@@ -159,14 +164,15 @@ ${atMobiles
 }
 
 function logCommand(args) {
-  return args.reduce((prev, item) => {
+  const command = args.reduce((prev, item) => {
     if (typeof item === "string") {
       return prev + ` ${item}`;
     } else if (Array.isArray(item)) {
       return prev + ` ${item.join(" ")}`;
     }
     return prev;
-  }, " ");
+  }, "Command: ");
+  console.log(command);
 }
 
 module.exports = {
