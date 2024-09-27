@@ -33,9 +33,10 @@ async function cleanDirectoryExcept(directory, excludeList, isTop) {
 
     if (file.isDirectory()) {
       // 递归删除子目录
-      await cleanDirectoryExcept(fullPath, excludeList, true);
+      // await cleanDirectoryExcept(fullPath, excludeList, true);
       // 删除空目录
-      await fs.rmdir(fullPath);
+      // await fs.rmdir(fullPath);
+      await fs.rm(fullPath, { recursive: true, force: true });
     } else {
       // 删除文件
       await fs.unlink(fullPath);
